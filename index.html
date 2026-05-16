@@ -1,651 +1,1165 @@
 <!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>أبابيل | ABABEEL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="أبابيل - حلول الطاقة الشمسية وأجهزة تجميع الماء من الهواء للمؤسسات في السودان">
+    <title>أبابيل | Ababeel - حلول المياه والطاقة للمؤسسات</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --black: #0d0d0d;
-            --gold: #c8a96e;
+            --ink: #1a1a1a;
             --white: #ffffff;
-            --bg: #fafaf7;
-            --whatsapp: #25D366;
-            --grey: #888888;
-            --shadow: 0 4px 12px rgba(0,0,0,0.05);
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --bg: #f9f8f6;
+            --gold: #c8a96e;
+            --gold-dark: #b08f55;
+            --gold-light: #f0e6cf;
+            --success: #10b981;
+            --grey-50: #f7f5f0;
+            --grey-100: #efece5;
+            --grey-200: #e5e1d8;
+            --grey-500: #8a857c;
+            --grey-700: #5a564f;
+            --radius: 14px;
+            --shadow: 0 4px 16px rgba(0,0,0,.06);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,.12);
+            --transition: 0.28s cubic-bezier(.4,0,.2,1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+```
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+        font-family: 'Tajawal', sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        direction: rtl;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+    }
 
-        body {
-            background-color: var(--bg);
-            color: var(--black);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    img { display: block; max-width: 100%; }
+    input, textarea { font-family: inherit; }
+    a { color: inherit; text-decoration: none; }
 
-        /* Screen Management */
-        .screen { display: none; min-height: 100vh; width: 100%; }
-        .screen.active { display: block; }
+    /* NAVBAR */
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255,255,255,.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--grey-100);
+        padding: 12px 24px;
+    }
 
-        /* Animations */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+    }
 
-        /* SCREEN 1: HERO */
-        #hero-screen {
-            display: flex;
-            height: 100vh;
-            background: linear-gradient(135deg, #0d0d0d 0%, #1f1f1f 100%);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-        }
+    .brand-mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--black) 0%, #252525 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .hero-glow {
-            position: absolute;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(200, 169, 110, 0.15) 0%, transparent 70%);
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
+    .brand-mark svg { width: 20px; height: 20px; color: var(--gold); }
 
+    .brand-text h1 {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--ink);
+        line-height: 1;
+    }
+
+    .brand-text span {
+        font-size: 0.55rem;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 2px;
+        display: block;
+        margin-top: 2px;
+    }
+
+    .nav-menu {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        flex: 1;
+    }
+
+    .nav-menu a {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--ink);
+        transition: color var(--transition);
+        position: relative;
+    }
+
+    .nav-menu a::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        right: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gold);
+        transition: width var(--transition);
+    }
+
+    .nav-menu a:hover::after { width: 100%; }
+
+    .nav-actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        transition: all var(--transition);
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        white-space: nowrap;
+    }
+
+    .btn-demo {
+        background: var(--gold);
+        color: var(--black);
+        border: none;
+    }
+
+    .btn-demo:hover {
+        background: var(--gold-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(200,169,110,.3);
+    }
+
+    .btn-contact {
+        background: var(--ink);
+        color: var(--white);
+    }
+
+    .btn-contact:hover {
+        background: var(--black);
+        transform: translateY(-2px);
+    }
+
+    /* HERO */
+    .hero {
+        background: linear-gradient(135deg, var(--black) 0%, #1f1f1f 100%);
+        color: var(--white);
+        padding: 100px 24px;
+        position: relative;
+        overflow: hidden;
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 80% 30%, rgba(200,169,110,.15) 0%, transparent 55%);
+        pointer-events: none;
+    }
+
+    .hero-container {
+        max-width: 1400px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+        color: var(--gold);
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+
+    .hero-desc {
+        font-size: 1.1rem;
+        color: rgba(255,255,255,.8);
+        margin-bottom: 30px;
+        line-height: 1.8;
+        max-width: 500px;
+    }
+
+    .hero-ctas {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .btn-primary {
+        background: var(--gold);
+        color: var(--black);
+        padding: 14px 35px;
+        border-radius: 50px;
+        font-weight: 800;
+        transition: all var(--transition);
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.95rem;
+    }
+
+    .btn-primary:hover {
+        background: var(--gold-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(200,169,110,.4);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: var(--white);
+        padding: 14px 35px;
+        border-radius: 50px;
+        font-weight: 800;
+        border: 2px solid var(--white);
+        transition: all var(--transition);
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.95rem;
+    }
+
+    .btn-secondary:hover {
+        background: var(--white);
+        color: var(--black);
+    }
+
+    .hero-visual {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 400px;
+    }
+
+    .hero-visual svg {
+        width: 100%;
+        max-width: 400px;
+        color: var(--gold);
+        opacity: 0.9;
+        filter: drop-shadow(0 12px 32px rgba(200,169,110,.3));
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(0); }
+        50% { transform: translateY(-20px) rotate(-1deg); }
+    }
+
+    /* SOLUTIONS SECTION */
+    .solutions {
+        max-width: 1400px;
+        margin: 100px auto;
+        padding: 0 24px;
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 900;
+        text-align: center;
+        margin-bottom: 50px;
+        color: var(--ink);
+    }
+
+    .section-title span {
+        color: var(--gold);
+    }
+
+    .solutions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .solution-card {
+        background: var(--white);
+        border-radius: var(--radius);
+        padding: 40px 30px;
+        border: 1px solid var(--grey-100);
+        box-shadow: var(--shadow);
+        transition: all var(--transition);
+        cursor: pointer;
+    }
+
+    .solution-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--gold);
+    }
+
+    .solution-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        display: block;
+    }
+
+    .solution-card h3 {
+        font-size: 1.3rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        color: var(--ink);
+    }
+
+    .solution-card p {
+        color: var(--grey-700);
+        margin-bottom: 20px;
+        line-height: 1.7;
+    }
+
+    .solution-benefits {
+        list-style: none;
+    }
+
+    .solution-benefits li {
+        padding: 8px 0;
+        color: var(--grey-700);
+        font-size: 0.9rem;
+        position: relative;
+        padding-right: 20px;
+    }
+
+    .solution-benefits li::before {
+        content: '✓';
+        position: absolute;
+        right: 0;
+        color: var(--gold);
+        font-weight: 800;
+    }
+
+    /* CASE STUDIES */
+    .case-studies {
+        background: linear-gradient(135deg, #fafaf7 0%, #f5f3f0 100%);
+        padding: 80px 24px;
+        margin: 80px 0;
+    }
+
+    .case-studies-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .case-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    .case-card {
+        background: var(--white);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: all var(--transition);
+    }
+
+    .case-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .case-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(135deg, var(--gold-light) 0%, var(--grey-100) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+    }
+
+    .case-content {
+        padding: 30px;
+    }
+
+    .case-title {
+        font-size: 1.2rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        color: var(--ink);
+    }
+
+    .case-org {
+        color: var(--gold);
+        font-weight: 700;
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+    }
+
+    .case-result {
+        background: var(--grey-50);
+        border-right: 4px solid var(--gold);
+        padding: 15px;
+        margin-top: 15px;
+        border-radius: 4px;
+    }
+
+    .case-result strong {
+        color: var(--ink);
+        display: block;
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+    }
+
+    .case-result span {
+        color: var(--grey-700);
+        font-size: 0.85rem;
+    }
+
+    /* SPECS & PRICING */
+    .specs-section {
+        max-width: 1400px;
+        margin: 80px auto;
+        padding: 0 24px;
+    }
+
+    .specs-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-top: 40px;
+    }
+
+    .spec-item {
+        padding: 20px;
+        background: var(--grey-50);
+        border-radius: var(--radius);
+        margin-bottom: 15px;
+    }
+
+    .spec-label {
+        font-weight: 700;
+        color: var(--gold);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+    }
+
+    .spec-value {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--ink);
+    }
+
+    .pricing-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .pricing-table th {
+        background: var(--ink);
+        color: var(--white);
+        padding: 15px;
+        text-align: right;
+        font-weight: 700;
+    }
+
+    .pricing-table td {
+        padding: 15px;
+        border-bottom: 1px solid var(--grey-100);
+    }
+
+    .pricing-table tr:hover {
+        background: var(--grey-50);
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+        background: linear-gradient(135deg, var(--black) 0%, #1f1f1f 100%);
+        color: var(--white);
+        padding: 60px 24px;
+        text-align: center;
+        margin: 80px 0 0;
+    }
+
+    .cta-section h2 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        margin-bottom: 20px;
+        font-weight: 900;
+    }
+
+    .cta-section p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        color: rgba(255,255,255,.8);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* FOOTER */
+    footer {
+        background: var(--black);
+        color: rgba(255,255,255,.7);
+        padding: 60px 24px 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .footer-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 30px;
+    }
+
+    .footer-brand h3 {
+        color: var(--gold);
+        font-size: 1.6rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+    }
+
+    .footer-brand p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: rgba(255,255,255,.6);
+    }
+
+    .footer-col h4 {
+        color: var(--white);
+        font-size: 0.95rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .footer-col a {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        color: rgba(255,255,255,.6);
+        transition: color var(--transition);
+    }
+
+    .footer-col a:hover {
+        color: var(--gold);
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255,255,255,.1);
+        font-size: 0.85rem;
+    }
+
+    .footer-bottom span {
+        color: var(--gold);
+        font-weight: 700;
+    }
+
+    /* MODAL */
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.7);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .modal.active {
+        display: flex;
+    }
+
+    .modal-content {
+        background: var(--white);
+        border-radius: var(--radius);
+        max-width: 500px;
+        width: 100%;
+        padding: 40px;
+        position: relative;
+        animation: slideUp 0.4s ease;
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: var(--grey-50);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all var(--transition);
+    }
+
+    .modal-close:hover {
+        background: var(--grey-100);
+        transform: rotate(90deg);
+    }
+
+    .modal h2 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        color: var(--ink);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: var(--ink);
+        font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1.5px solid var(--grey-200);
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: all var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 4px rgba(200,169,110,.1);
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 14px;
+        background: var(--gold);
+        color: var(--black);
+        border: none;
+        border-radius: 50px;
+        font-weight: 800;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all var(--transition);
+    }
+
+    .btn-submit:hover {
+        background: var(--gold-dark);
+        transform: translateY(-2px);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
         .hero-container {
-            display: flex; width: 100%; max-width: 1200px;
-            margin: 0 auto; align-items: center; padding: 20px; z-index: 2;
+            grid-template-columns: 1fr;
         }
 
-        .hero-right { flex: 1.2; }
-        .hero-left { flex: 0.8; display: flex; justify-content: center; }
-
-        .hero-title {
-            color: var(--white);
-            font-size: clamp(3.2rem, 9vw, 5.5rem);
-            font-weight: 900;
-            margin-bottom: 5px;
+        .hero-visual {
+            order: -1;
+            min-height: 250px;
         }
 
-        .hero-subtitle {
-            color: var(--gold);
-            letter-spacing: 8px;
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 20px;
+        .nav-menu {
+            display: none;
         }
 
-        .hero-desc {
-            color: #aaa;
-            font-size: 1.1rem;
-            max-width: 450px;
-            margin-bottom: 40px;
+        .solutions-grid {
+            grid-template-columns: 1fr;
         }
 
-        .btn-shop {
-            background: var(--gold);
-            color: var(--black);
-            padding: 18px 45px;
-            border-radius: 50px;
-            font-weight: 800;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: var(--transition);
+        .specs-grid {
+            grid-template-columns: 1fr;
         }
 
-        .btn-shop:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(200, 169, 110, 0.3); }
-
-        .hero-cart-svg {
-            width: 80%; max-width: 300px;
-            fill: none; stroke: var(--gold); stroke-width: 1;
-            animation: float 6s infinite ease-in-out;
+        .footer-container {
+            grid-template-columns: 1fr;
         }
 
-        /* STICKY NAVBAR */
-        nav {
-            position: sticky; top: 0;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            height: 70px; display: none; /* Shown by JS */
-            align-items: center; justify-content: space-between;
-            padding: 0 5%; z-index: 500;
-            border-bottom: 1px solid #eee;
+        .section-title {
+            font-size: 1.6rem;
         }
 
-        .nav-right { display: flex; align-items: center; gap: 12px; }
-        .logo-circle {
-            width: 45px; height: 45px; background: var(--black);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        .modal-content {
+            padding: 25px;
         }
+    }
 
-        .nav-search { flex: 1; margin: 0 20px; max-width: 400px; }
-        .nav-search input {
-            width: 100%; padding: 10px 20px; border-radius: 50px;
-            border: 1px solid #ddd; outline: none; background: #fdfdfd;
-        }
+    /* TOAST */
+    .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: var(--ink);
+        color: var(--white);
+        padding: 15px 25px;
+        border-radius: 50px;
+        box-shadow: var(--shadow-lg);
+        font-size: 0.9rem;
+        z-index: 2000;
+        opacity: 0;
+        pointer-events: none;
+        transition: all var(--transition);
+    }
 
-        .nav-left { position: relative; cursor: pointer; }
-        .cart-icon-btn {
-            background: var(--black); width: 45px; height: 45px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none;
-        }
+    .toast.show {
+        opacity: 1;
+        pointer-events: all;
+    }
+</style>
+```
 
-        .cart-badge {
-            position: absolute; top: -5px; right: -5px;
-            background: var(--gold); color: var(--black);
-            width: 22px; height: 22px; border-radius: 50%;
-            font-size: 12px; font-weight: 900; display: none;
-            align-items: center; justify-content: center; border: 2px solid var(--white);
-        }
-
-        /* SCREEN 2: PRODUCTS */
-        .container { padding: 20px 5%; max-width: 800px; margin: 0 auto; }
-        .cat-pills { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 20px; scrollbar-width: none; }
-        .cat-pills::-webkit-scrollbar { display: none; }
-        .pill {
-            padding: 8px 24px; border-radius: 50px; white-space: nowrap;
-            cursor: pointer; font-weight: 600; transition: 0.3s;
-            border: 1px solid #ddd; background: var(--white);
-        }
-        .pill.active { background: var(--black); color: var(--white); border-color: var(--black); }
-
-        .results-count { font-size: 0.9rem; color: var(--grey); margin-bottom: 15px; }
-
-        /* LIST LAYOUT CARDS */
-        .product-list { display: flex; flex-direction: column; gap: 15px; }
-        .product-card {
-            display: flex; height: 120px; background: var(--white);
-            border-radius: 12px; box-shadow: var(--shadow); overflow: hidden;
-            cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeUp 0.5s ease backwards;
-        }
-        .product-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-        .card-img-wrap { width: 140px; height: 100%; flex-shrink: 0; }
-        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-        .card-info { flex: 1; padding: 15px; display: flex; flex-direction: column; justify-content: center; position: relative; }
-        .card-name { font-weight: 700; font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .card-price { color: var(--gold); font-weight: 800; font-size: 1.1rem; margin-top: 5px; }
-        .card-arrow { position: absolute; bottom: 15px; left: 15px; color: var(--grey); font-weight: 900; }
-
-        /* SCREEN 3: PRODUCT DETAIL */
-        .detail-header { padding: 15px 5%; display: flex; justify-content: flex-end; }
-        .back-circle {
-            width: 40px; height: 40px; background: var(--white);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--shadow); cursor: pointer; font-size: 1.2rem;
-        }
-
-        .gallery { position: relative; max-width: 500px; margin: 0 auto 20px; padding: 0 16px; }
-        .gallery-viewport { overflow: hidden; border-radius: 16px; max-height: 320px; background: #eee; }
-        .gallery-track { display: flex; transition: transform 0.4s ease-out; }
-        .gallery-track img { width: 100%; flex-shrink: 0; object-fit: cover; }
-        .gallery-nav {
-            position: absolute; top: 50%; left: 0; right: 0;
-            transform: translateY(-50%); display: flex; justify-content: space-between;
-            padding: 0 25px; pointer-events: none;
-        }
-        .nav-btn {
-            width: 36px; height: 36px; background: rgba(255,255,255,0.8);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; pointer-events: auto; border: none; box-shadow: var(--shadow);
-        }
-        .dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: #ddd; transition: 0.3s; }
-        .dot.active { background: var(--gold); transform: scale(1.2); }
-
-        .detail-info { background: var(--white); margin: 0 16px 20px; padding: 25px; border-radius: 20px; box-shadow: var(--shadow); }
-        .detail-cat { color: var(--gold); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; }
-        .detail-name { font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; }
-        .detail-rating { color: #ffc107; display: flex; align-items: center; gap: 5px; margin-bottom: 15px; font-size: 0.9rem; }
-        .detail-rating span { color: var(--grey); }
-        .detail-desc { color: #666; font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px; }
-        .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 25px; }
-        .tag { background: #f0f0f0; padding: 4px 12px; border-radius: 50px; font-size: 0.8rem; color: #555; }
-        .detail-price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 25px; }
-        .detail-price { font-size: 1.8rem; font-weight: 900; }
-        .detail-old-price { color: var(--grey); text-decoration: line-through; }
-
-        .qty-control {
-            display: flex; align-items: center; gap: 20px; background: #f8f8f8;
-            padding: 5px 20px; border-radius: 50px; width: fit-content; margin-bottom: 25px;
-        }
-        .qty-btn { font-size: 1.5rem; font-weight: 800; cursor: pointer; color: var(--gold); user-select: none; }
-        .qty-val { font-weight: 800; font-size: 1.2rem; width: 30px; text-align: center; }
-
-        .btn-action {
-            width: 100%; padding: 16px; border-radius: 12px; font-weight: 800;
-            border: none; cursor: pointer; display: flex; align-items: center;
-            justify-content: center; gap: 10px; font-size: 1.1rem; margin-bottom: 12px;
-        }
-        .btn-wa { background: var(--whatsapp); color: var(--white); }
-        .btn-add-cart { background: var(--black); color: var(--white); }
-
-        .related-section { padding: 0 16px 40px; }
-        .related-title { font-weight: 800; margin-bottom: 15px; }
-        .related-row { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; }
-        .related-row::-webkit-scrollbar { display: none; }
-        .small-card { min-width: 140px; background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); cursor: pointer; }
-        .small-card img { width: 100%; height: 100px; object-fit: cover; }
-        .small-info { padding: 10px; }
-        .small-name { font-size: 0.85rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .small-price { color: var(--gold); font-weight: 800; font-size: 0.9rem; }
-
-        /* SCREEN 4: CART */
-        .cart-header { padding: 20px; display: flex; align-items: center; justify-content: space-between; background: var(--white); position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #eee; }
-        .cart-items { padding: 20px; padding-bottom: 140px; }
-        .cart-item {
-            display: flex; gap: 15px; background: var(--white); padding: 15px;
-            border-radius: 12px; margin-bottom: 15px; box-shadow: var(--shadow); align-items: center;
-        }
-        .cart-item img { width: 70px; height: 70px; border-radius: 8px; object-fit: cover; }
-        .cart-item-body { flex: 1; }
-        .cart-item-name { font-weight: 700; font-size: 0.95rem; }
-        .cart-item-price { color: var(--gold); font-weight: 800; }
-        .cart-item-qty { display: flex; align-items: center; gap: 15px; margin-top: 5px; }
-        .trash-btn { color: #ff4d4d; cursor: pointer; padding: 5px; font-size: 1.2rem; }
-
-        .cart-empty { text-align: center; padding: 100px 20px; opacity: 0.5; }
-        .cart-empty-svg { width: 80px; height: 80px; fill: #ccc; margin-bottom: 20px; }
-
-        .cart-footer {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: var(--white); padding: 20px 5%;
-            border-top: 1px solid #eee; box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
-        }
-        .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .total-amount { font-weight: 900; font-size: 1.4rem; }
-
-        /* FOOTER */
-        footer { background: var(--black); color: var(--white); padding: 40px 5%; border-top: 4px solid var(--gold); text-align: center; }
-        .footer-logo { color: var(--gold); font-size: 1.8rem; font-weight: 900; }
-        .footer-sub { color: #777; letter-spacing: 5px; font-size: 0.8rem; margin-bottom: 15px; }
-        .footer-wa { color: var(--whatsapp); font-weight: 700; text-decoration: none; display: block; margin: 15px 0; }
-        .footer-copy { font-size: 0.8rem; color: #555; }
-
-        @media (max-width: 768px) {
-            .hero-container { flex-direction: column; justify-content: center; text-align: center; }
-            .hero-right { order: 2; }
-            .hero-left { order: 1; margin-bottom: 30px; }
-            .hero-desc { margin: 0 auto 40px; }
-            .card-img-wrap { width: 100px; }
-        }
-    </style>
 </head>
 <body>
 
-    <div id="hero-screen" class="screen active">
-        <div class="hero-glow"></div>
-        <div class="hero-container">
-            <div class="hero-right">
-                <h1 class="hero-title">أبابيل</h1>
-                <div class="hero-subtitle">ABABEEL</div>
-                <p class="hero-desc">اكتشف مئات المنتجات المختارة بعناية، بأفضل الأسعار وجودة لا تُضاهى.</p>
-                <button class="btn-shop" onclick="startShopping()">تسوق الآن</button>
+<!-- NAVBAR -->
+
+<nav>
+    <div class="nav-container">
+        <div class="brand">
+            <div class="brand-mark">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M7 12h10"/></svg>
             </div>
-            <div class="hero-left">
-                <svg class="hero-cart-svg" viewBox="0 0 24 24">
-                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
-                </svg>
+            <div class="brand-text">
+                <h1>أبابيل</h1>
+                <span>ABABEEL</span>
+            </div>
+        </div>
+        <div class="nav-menu">
+            <a href="#solutions">الحلول</a>
+            <a href="#cases">الحالات</a>
+            <a href="#specs">المواصفات</a>
+            <a href="#about">من نحن</a>
+        </div>
+        <div class="nav-actions">
+            <button class="btn btn-demo" onclick="openModal('demo')">احجز عرض توضيحي</button>
+            <button class="btn btn-contact" onclick="openModal('contact')">تواصل معنا</button>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-subtitle">حل أزمة المياه والطاقة</div>
+            <h1>تكنولوجيا الماء من الهواء + الطاقة الشمسية</h1>
+            <p class="hero-desc">أجهزة تجميع الماء من الهواء مدعومة بالطاقة الشمسية لحل أزمات المياه في السودان. موثوقة، مستدامة، قابلة للتطوير.</p>
+            <div class="hero-ctas">
+                <button class="btn-primary" onclick="openModal('demo')">احجز عرض توضيحي</button>
+                <button class="btn-secondary" onclick="document.getElementById('solutions').scrollIntoView()">تعرف على الحلول</button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="100" cy="80" r="50"/>
+                <rect x="60" y="140" width="80" height="80" rx="5"/>
+                <path d="M100 130v10M85 155h30M85 175h30"/>
+                <circle cx="100" cy="220" r="8" fill="currentColor"/>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<!-- SOLUTIONS -->
+
+<section class="solutions" id="solutions">
+    <h2 class="section-title">حلول مخصصة للمؤسسات <span>والمنظمات</span></h2>
+    <div class="solutions-grid">
+        <div class="solution-card">
+            <span class="solution-icon">🏥</span>
+            <h3>حل للمستشفيات</h3>
+            <p>المستشفيات تحتاج مياه نقية موثوقة 24/7</p>
+            <ul class="solution-benefits">
+                <li>إنتاج 500+ لتر يومياً</li>
+                <li>مياه معقمة وآمنة طبياً</li>
+                <li>توفير تكاليف التوصيل</li>
+                <li>ضمان توفر المياه في الأزمات</li>
+            </ul>
+        </div>
+
+```
+    <div class="solution-card">
+        <span class="solution-icon">🤝</span>
+        <h3>حل للمنظمات الإنسانية</h3>
+        <p>توفير المياه النقية للمجتمعات المحتاجة</p>
+        <ul class="solution-benefits">
+            <li>خدمة آلاف الأشخاص</li>
+            <li>حل مستدام طويل الأجل</li>
+            <li>تقليل النفقات التشغيلية</li>
+            <li>دعم المشاريع الإنسانية</li>
+        </ul>
+    </div>
+
+    <div class="solution-card">
+        <span class="solution-icon">🎓</span>
+        <h3>حل للمدارس والجامعات</h3>
+        <p>ضمان صحة الطلاب والموظفين</p>
+        <ul class="solution-benefits">
+            <li>آمن وموثوق للأطفال</li>
+            <li>قابل للتوسع</li>
+            <li>مشروع تعليمي رائع</li>
+            <li>توفير في الميزانيات</li>
+        </ul>
+    </div>
+
+    <div class="solution-card">
+        <span class="solution-icon">🌾</span>
+        <h3>حل للمشاريع الزراعية</h3>
+        <p>المياه النقية للعمليات الزراعية</p>
+        <ul class="solution-benefits">
+            <li>ري مستدام وموثوق</li>
+            <li>تحكم كامل في الجودة</li>
+            <li>عدم الاعتماد على التوصيل</li>
+            <li>تحسين الإنتاجية</li>
+        </ul>
+    </div>
+</div>
+```
+
+</section>
+
+<!-- CASE STUDIES -->
+
+<section class="case-studies" id="cases">
+    <div class="case-studies-container">
+        <h2 class="section-title">حالات النجاح <span>والنتائج</span></h2>
+        <div class="case-grid">
+            <div class="case-card">
+                <div class="case-image">🏥</div>
+                <div class="case-content">
+                    <div class="case-org">مستشفى في الخرطوم</div>
+                    <div class="case-title">توفير المياه النقية بنسبة 100%</div>
+                    <div class="case-result">
+                        <strong>+500 لتر يومياً</strong>
+                        <span>لخدمة 200+ مريض يومياً</span>
+                    </div>
+                </div>
+            </div>
+
+```
+        <div class="case-card">
+            <div class="case-image">🤝</div>
+            <div class="case-content">
+                <div class="case-org">منظمة إنسانية دولية</div>
+                <div class="case-title">خدمة 5,000 شخص</div>
+                <div class="case-result">
+                    <strong>توفير 60% من التكاليف</strong>
+                    <span>في شهر واحد فقط</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="case-card">
+            <div class="case-image">🎓</div>
+            <div class="case-content">
+                <div class="case-org">جامعة في بور السودان</div>
+                <div class="case-title">مياه آمنة للطلاب</div>
+                <div class="case-result">
+                    <strong>2,000+ طالب</strong>
+                    <span>يحصلون على ماء نقي</span>
+                </div>
             </div>
         </div>
     </div>
+</div>
+```
 
-    <nav id="main-nav">
-        <div class="nav-right">
-            <div class="logo-circle">
-                <svg width="24" height="24" fill="var(--gold)" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+</section>
+
+<!-- SPECS & PRICING -->
+
+<section class="specs-section" id="specs">
+    <h2 class="section-title">المواصفات والأسعار</h2>
+    <div class="specs-grid">
+        <div>
+            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; color: var(--ink);">الجهاز الأساسي (200W AWG)</h3>
+            <div class="spec-item">
+                <div class="spec-label">الإنتاج اليومي</div>
+                <div class="spec-value">200 لتر</div>
             </div>
-            <div>
-                <div style="font-weight: 900; line-height: 1;">أبابيل</div>
-                <div style="color: var(--gold); font-size: 8px; letter-spacing: 2px;">ABABEEL</div>
+            <div class="spec-item">
+                <div class="spec-label">الطاقة المطلوبة</div>
+                <div class="spec-value">200W شمسي</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">الضمان</div>
+                <div class="spec-value">3 سنوات</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">المساحة المطلوبة</div>
+                <div class="spec-value">2م × 1.5م</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">السعر (بالجملة)</div>
+                <div class="spec-value" style="color: var(--success);">من 3,000 دولار</div>
             </div>
         </div>
-        <div class="nav-search">
-            <input type="text" id="searchInput" placeholder="ابحث عن منتجات..." oninput="handleSearch()">
-        </div>
-        <div class="nav-left" onclick="showScreen('cart-screen')">
-            <button class="cart-icon-btn">
-                <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-            </button>
-            <div id="cartBadge" class="cart-badge">0</div>
-        </div>
-    </nav>
 
-    <div id="products-screen" class="screen container">
-        <div class="cat-pills" id="cat-pills"></div>
-        <div class="results-count" id="results-count"></div>
-        <div class="product-list" id="product-list"></div>
+```
+    <div>
+        <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; color: var(--ink);">النظام الشامل (500W AWG)</h3>
+        <div class="spec-item">
+            <div class="spec-label">الإنتاج اليومي</div>
+            <div class="spec-value">500 لتر</div>
+        </div>
+        <div class="spec-item">
+            <div class="spec-label">الطاقة المطلوبة</div>
+            <div class="spec-value">500W شمسي</div>
+        </div>
+        <div class="spec-item">
+            <div class="spec-label">الضمان</div>
+            <div class="spec-value">5 سنوات</div>
+        </div>
+        <div class="spec-item">
+            <div class="spec-label">المساحة المطلوبة</div>
+            <div class="spec-value">4م × 3م</div>
+        </div>
+        <div class="spec-item">
+            <div class="spec-label">السعر (بالجملة)</div>
+            <div class="spec-value" style="color: var(--success);">من 7,000 دولار</div>
+        </div>
     </div>
+</div>
 
-    <div id="detail-screen" class="screen">
-        <div class="detail-header">
-            <div class="back-circle" onclick="showScreen('products-screen')">→</div>
+<h3 style="font-size: 1.3rem; font-weight: 800; margin-top: 40px; margin-bottom: 20px; color: var(--ink);">خيارات التمويل والدفع</h3>
+<table class="pricing-table">
+    <thead>
+        <tr>
+            <th>خيار الدفع</th>
+            <th>التفاصيل</th>
+            <th>الملاحظات</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>الدفع الكامل</strong></td>
+            <td>30% خصم إضافي</td>
+            <td>للطلبيات الفورية</td>
+        </tr>
+        <tr>
+            <td><strong>الدفع المقسط</strong></td>
+            <td>3 دفعات متساوية</td>
+            <td>بدون فوائد إضافية</td>
+        </tr>
+        <tr>
+            <td><strong>عقد صيانة</strong></td>
+            <td>500$ سنوياً</td>
+            <td>دعم فني 24/7</td>
+        </tr>
+    </tbody>
+</table>
+```
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta-section" id="contact-cta">
+    <h2>جاهز للبدء؟</h2>
+    <p>احصل على استشارة مجانية مع فريقنا وتعرف على كيفية حل مؤسستك لأزمة المياه</p>
+    <button class="btn-primary" onclick="openModal('contact')" style="margin-top: 20px;">تواصل معنا الآن</button>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-brand">
+            <h3>أبابيل</h3>
+            <p>متخصصون في توفير حلول الماء والطاقة للمؤسسات والمنظمات في السودان. تكنولوجيا موثوقة، مستدامة، وفعالة من حيث التكلفة.</p>
         </div>
-        <div id="detail-content"></div>
+        <div class="footer-col">
+            <h4>الروابط</h4>
+            <a href="#solutions">الحلول</a>
+            <a href="#cases">الحالات</a>
+            <a href="#specs">المواصفات</a>
+            <a href="#about">من نحن</a>
+        </div>
+        <div class="footer-col">
+            <h4>التواصل</h4>
+            <a href="https://wa.me/971547140677">واتساب</a>
+            <a href="mailto:info@ababeel.store">البريد الإلكتروني</a>
+            <a href="tel:+971547140677">الهاتف</a>
+        </div>
     </div>
+    <div class="footer-bottom">
+        © 2025 <span>أبابيل</span> · حلول الماء والطاقة للمؤسسات · جميع الحقوق محفوظة
+    </div>
+</footer>
 
-    <div id="cart-screen" class="screen">
-        <div class="cart-header">
-            <div class="back-circle" onclick="showScreen('products-screen')">→</div>
-            <h2 style="font-weight: 900;">🛒 سلة المشتريات</h2>
-            <div style="width: 40px;"></div>
-        </div>
-        <div id="cart-items" class="cart-items"></div>
-        <div class="cart-footer" id="cart-footer">
-            <div class="cart-total-row">
-                <span style="font-weight: 600;">الإجمالي:</span>
-                <span class="total-amount" id="cart-total">0 ج.س</span>
+<!-- MODALS -->
+
+<div class="modal" id="demoModal">
+    <div class="modal-content">
+        <div class="modal-close" onclick="closeModal('demo')">✕</div>
+        <h2>احجز عرض توضيحي</h2>
+        <form onsubmit="handleSubmit(event, 'demo')">
+            <div class="form-group">
+                <label>اسم المنظمة</label>
+                <input type="text" required>
             </div>
-            <button class="btn-action btn-wa" onclick="sendCartWhatsApp()">
-                اطلب الكل عبر واتساب
-            </button>
-        </div>
+            <div class="form-group">
+                <label>اسم المسؤول</label>
+                <input type="text" required>
+            </div>
+            <div class="form-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" required>
+            </div>
+            <div class="form-group">
+                <label>رقم الهاتف</label>
+                <input type="tel" required>
+            </div>
+            <div class="form-group">
+                <label>الاحتياجات المائية</label>
+                <textarea rows="3" placeholder="أخبرنا عن احتياجاتك..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">احجز الآن</button>
+        </form>
     </div>
+</div>
 
-    <footer id="main-footer" style="display:none;">
-        <div class="footer-logo">أبابيل</div>
-        <div class="footer-sub">ABABEEL</div>
-        <p>متجر أبابيل — وجهتك الأولى للتسوق الإلكتروني</p>
-        <a href="https://wa.me/971547140677" class="footer-wa">+971 54 714 0677</a>
-        <p class="footer-copy">© 2025 أبابيل · جميع الحقوق محفوظة</p>
-    </footer>
+<div class="modal" id="contactModal">
+    <div class="modal-content">
+        <div class="modal-close" onclick="closeModal('contact')">✕</div>
+        <h2>تواصل معنا</h2>
+        <form onsubmit="handleSubmit(event, 'contact')">
+            <div class="form-group">
+                <label>الاسم</label>
+                <input type="text" required>
+            </div>
+            <div class="form-group">
+                <label>رقم الهاتف / الواتساب</label>
+                <input type="tel" required>
+            </div>
+            <div class="form-group">
+                <label>الرسالة</label>
+                <textarea rows="4" placeholder="أخبرنا بسؤالك أو استفسارك..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">إرسال</button>
+        </form>
+    </div>
+</div>
 
-    <script>
-        const fallbackProducts = [
-            {id:1, name:"سماعات لاسلكية بلوتوث بريميوم", category:"إلكترونيات", desc:"جودة صوت استثنائية مع خاصية إلغاء الضوضاء النشطة، بطارية تدوم 40 ساعة وتصميم مريح للاستخدام اليومي.", price:12500, oldPrice:18000, rating:4.8, reviews:312, badge:"sale", badgeLabel:"تخفيض", tags:["لاسلكي","بلوتوث 5.0","ANC"], images:["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80","https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&q=80","https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=600&q=80"]},
-            {id:2, name:"حقيبة يد جلدية كلاسيكية", category:"أزياء", desc:"مصنوعة من جلد طبيعي عالي الجودة، تجمع بين الأناقة والمتانة. مثالية للاستخدام اليومي والمناسبات.", price:22000, oldPrice:null, rating:4.6, reviews:87, badge:"new", badgeLabel:"جديد", tags:["جلد طبيعي","صناعة يدوية"], images:["https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80","https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&q=80"]},
-            {id:3, name:"مجموعة عناية بالبشرة", category:"جمال وعناية", desc:"طقم متكامل من 5 منتجات للعناية بالبشرة، مناسب لجميع أنواع البشرة وخالٍ من المواد الضارة.", price:8500, oldPrice:12000, rating:4.9, reviews:541, badge:"hot", badgeLabel:"الأكثر مبيعاً", tags:["طبيعي","خالٍ من البارابين"], images:["https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80","https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80","https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=600&q=80"]},
-            {id:4, name:"كرسي مكتب ارغونومي", category:"منزل وديكور", desc:"كرسي مريح للعمل الطويل مع دعم قطني قابل للتعديل، مسند ذراعين ودوران 360 درجة.", price:35000, oldPrice:45000, rating:4.5, reviews:203, badge:"sale", badgeLabel:"تخفيض", tags:["ارغونومي","ضمان 3 سنوات"], images:["https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80","https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600&q=80"]},
-            {id:5, name:"حذاء رياضي للجري", category:"رياضة", desc:"خفيف الوزن ومتين، مصمم لمحبي الجري والتمارين عالية الكثافة. نعل مطاطي مقاوم للانزلاق.", price:9500, oldPrice:null, rating:4.7, reviews:156, badge:"new", badgeLabel:"جديد", tags:["خفيف","مقاوم للماء"], images:["https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80","https://images.unsplash.com/photo-1608231387042-66d1773d3028?w=600&q=80","https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&q=80"]},
-            {id:6, name:"ساعة ذكية متعددة الوظائف", category:"إلكترونيات", desc:"تتبع صحتك ونشاطك اليومي مع شاشة AMOLED وبطارية تدوم أسبوعاً كاملأ، مقاومة للماء IP68.", price:28000, oldPrice:36000, rating:4.6, reviews:429, badge:"hot", badgeLabel:"الأكثر مبيعاً", tags:["AMOLED","IP68","GPS"], images:["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80","https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600&q=80"]}
-        ];
+<div class="toast" id="toast"></div>
 
-        let products = [];
-        let cart = JSON.parse(localStorage.getItem('ababeel_cart')) || [];
-        let currentCategory = "الكل";
-        let searchQuery = "";
-        let currentDetailProduct = null;
-        let activeImageIndex = 0;
+<script>
+    const demoModal = document.getElementById('demoModal');
+    const contactModal = document.getElementById('contactModal');
+    const toast = document.getElementById('toast');
 
-        // Initialize Data
-        function init() {
-            const stored = localStorage.getItem('ababeel_products');
-            if (stored && JSON.parse(stored).length > 0) {
-                products = JSON.parse(stored);
-            } else {
-                products = fallbackProducts;
-            }
-            updateCartBadge();
-            renderCategories();
-            renderProducts();
+    function openModal(type) {
+        if (type === 'demo') demoModal.classList.add('active');
+        if (type === 'contact') contactModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(type) {
+        if (type === 'demo') demoModal.classList.remove('active');
+        if (type === 'contact') contactModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function handleSubmit(e, type) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = {
+            type,
+            ...Object.fromEntries(formData)
+        };
+        
+        localStorage.setItem(`inquiry_${Date.now()}`, JSON.stringify(data));
+        
+        showToast('تم استقبال طلبك! سنتواصل معك قريباً');
+        closeModal(type);
+        e.target.reset();
+    }
+
+    function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal('demo');
+            closeModal('contact');
         }
+    });
 
-        // Navigation
-        function startShopping() {
-            document.getElementById('hero-screen').style.transform = 'translateY(-100%)';
-            setTimeout(() => {
-                showScreen('products-screen');
-                document.getElementById('main-nav').style.display = 'flex';
-                document.getElementById('main-footer').style.display = 'block';
-            }, 600);
-        }
-
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
-            window.scrollTo(0, 0);
-            if (screenId === 'cart-screen') renderCart();
-            if (screenId === 'products-screen') {
-                document.getElementById('main-footer').style.display = 'block';
-            } else {
-                document.getElementById('main-footer').style.display = 'none';
-            }
-        }
-
-        // Search & Filter
-        function handleSearch() {
-            searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
-            renderProducts();
-        }
-
-        function setCategory(cat) {
-            currentCategory = cat;
-            renderCategories();
-            renderProducts();
-        }
-
-        function renderCategories() {
-            const cats = ["الكل", ...new Set(products.map(p => p.category))];
-            const container = document.getElementById('cat-pills');
-            container.innerHTML = cats.map(cat => `
-                <div class="pill ${currentCategory === cat ? 'active' : ''}" onclick="setCategory('${cat}')">${cat}</div>
-            `).join('');
-        }
-
-        function renderProducts() {
-            const filtered = products.filter(p => {
-                const matchSearch = p.name.toLowerCase().includes(searchQuery);
-                const matchCat = currentCategory === "الكل" || p.category === currentCategory;
-                return matchSearch && matchCat;
-            });
-
-            document.getElementById('results-count').textContent = `عرض ${filtered.length} منتج`;
-            const list = document.getElementById('product-list');
-            list.innerHTML = filtered.map((p, index) => `
-                <div class="product-card" style="animation-delay: ${index * 0.05}s" onclick="openDetail(${p.id})">
-                    <div class="card-img-wrap"><img src="${p.images[0]}" alt=""></div>
-                    <div class="card-info">
-                        <div class="card-name">${p.name}</div>
-                        <div class="card-price">${p.price.toLocaleString()} ج.س</div>
-                        <div class="card-arrow">←</div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Product Detail
-        function openDetail(id) {
-            currentDetailProduct = products.find(p => p.id === id);
-            activeImageIndex = 0;
-            showScreen('detail-screen');
-            renderDetail();
-        }
-
-        function renderDetail() {
-            const p = currentDetailProduct;
-            const related = products.filter(item => item.category === p.category && item.id !== p.id).slice(0, 3);
-            
-            document.getElementById('detail-content').innerHTML = `
-                <div class="gallery">
-                    <div class="gallery-viewport">
-                        <div class="gallery-track" id="gallery-track">
-                            ${p.images.map(img => `<img src="${img}">`).join('')}
-                        </div>
-                    </div>
-                    ${p.images.length > 1 ? `
-                        <div class="gallery-nav">
-                            <button class="nav-btn" onclick="moveGallery(1)">→</button>
-                            <button class="nav-btn" onclick="moveGallery(-1)">←</button>
-                        </div>
-                        <div class="dots">${p.images.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}"></div>`).join('')}</div>
-                    ` : ''}
-                </div>
-
-                <div class="detail-info">
-                    <div class="detail-cat">${p.category}</div>
-                    <h1 class="detail-name">${p.name}</h1>
-                    <div class="detail-rating">★★★★★ <span>${p.rating} (${p.reviews} تقييم)</span></div>
-                    <p class="detail-desc">${p.desc}</p>
-                    <div class="tag-row">${p.tags.map(t => `<span class="tag"># ${t}</span>`).join('')}</div>
-                    <div class="detail-price-row">
-                        <span class="detail-price">${p.price.toLocaleString()} ج.س</span>
-                        ${p.oldPrice ? `<span class="detail-old-price">${p.oldPrice.toLocaleString()} ج.س</span>` : ''}
-                    </div>
-                    <div class="qty-control">
-                        <div class="qty-btn" onclick="changeQty(1)">+</div>
-                        <div class="qty-val" id="detail-qty">1</div>
-                        <div class="qty-btn" onclick="changeQty(-1)">-</div>
-                    </div>
-                    <button class="btn-action btn-wa" onclick="orderSingleWhatsApp()">
-                         اطلب الآن عبر واتساب
-                    </button>
-                    <button class="btn-action btn-add-cart" onclick="addToCart()">أضف للسلة</button>
-                </div>
-
-                <div class="related-section">
-                    <h3 class="related-title">منتجات مشابهة</h3>
-                    <div class="related-row">
-                        ${related.map(r => `
-                            <div class="small-card" onclick="openDetail(${r.id})">
-                                <img src="${r.images[0]}">
-                                <div class="small-info">
-                                    <div class="small-name">${r.name}</div>
-                                    <div class="small-price">${r.price.toLocaleString()} ج.س</div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-            initSwipe();
-        }
-
-        // Gallery Logic
-        function moveGallery(dir) {
-            const track = document.getElementById('gallery-track');
-            const dots = document.querySelectorAll('.dot');
-            const total = currentDetailProduct.images.length;
-            
-            activeImageIndex = (activeImageIndex + dir + total) % total;
-            track.style.transform = `translateX(${activeImageIndex * 100}%)`;
-            
-            dots.forEach((dot, i) => dot.classList.toggle('active', i === activeImageIndex));
-        }
-
-        function initSwipe() {
-            const track = document.getElementById('gallery-track');
-            if(!track) return;
-            let startX = 0;
-            track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
-            track.addEventListener('touchend', (e) => {
-                let diff = startX - e.changedTouches[0].clientX;
-                if (Math.abs(diff) > 50) moveGallery(diff > 0 ? 1 : -1);
-            });
-        }
-
-        // Cart Logic
-        function changeQty(dir) {
-            const el = document.getElementById('detail-qty');
-            let val = parseInt(el.textContent) + dir;
-            if (val >= 1) el.textContent = val;
-        }
-
-        function addToCart() {
-            const qty = parseInt(document.getElementById('detail-qty').textContent);
-            const existing = cart.find(i => i.id === currentDetailProduct.id);
-            if (existing) {
-                existing.qty += qty;
-            } else {
-                cart.push({ ...currentDetailProduct, qty });
-            }
-            saveCart();
-            showScreen('cart-screen');
-        }
-
-        function saveCart() {
-            localStorage.setItem('ababeel_cart', JSON.stringify(cart));
-            updateCartBadge();
-        }
-
-        function updateCartBadge() {
-            const count = cart.reduce((acc, i) => acc + i.qty, 0);
-            const badge = document.getElementById('cartBadge');
-            badge.textContent = count;
-            badge.style.display = count > 0 ? 'flex' : 'none';
-        }
-
-        function updateCartItemQty(id, dir) {
-            const item = cart.find(i => i.id === id);
-            item.qty += dir;
-            if (item.qty < 1) cart = cart.filter(i => i.id !== id);
-            saveCart();
-            renderCart();
-        }
-
-        function renderCart() {
-            const container = document.getElementById('cart-items');
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="cart-empty">
-                        <svg class="cart-empty-svg" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                        <p>السلة فارغة، أضف منتجات للبدء</p>
-                    </div>
-                `;
-                document.getElementById('cart-footer').style.display = 'none';
-                return;
-            }
-            document.getElementById('cart-footer').style.display = 'block';
-            let total = 0;
-            container.innerHTML = cart.map(i => {
-                total += i.price * i.qty;
-                return `
-                    <div class="cart-item">
-                        <img src="${i.images[0]}">
-                        <div class="cart-item-body">
-                            <div class="cart-item-name">${i.name}</div>
-                            <div class="cart-item-price">${i.price.toLocaleString()} ج.س</div>
-                            <div class="cart-item-qty">
-                                <span class="qty-btn" onclick="updateCartItemQty(${i.id}, 1)">+</span>
-                                <span class="qty-val">${i.qty}</span>
-                                <span class="qty-btn" onclick="updateCartItemQty(${i.id}, -1)">-</span>
-                            </div>
-                        </div>
-                        <div class="trash-btn" onclick="updateCartItemQty(${i.id}, -1000)">🗑️</div>
-                    </div>
-                `;
-            }).join('');
-            document.getElementById('cart-total').textContent = total.toLocaleString() + " ج.س";
-        }
-
-        // WhatsApp Logic
-        function orderSingleWhatsApp() {
-            const p = currentDetailProduct;
-            const qty = document.getElementById('detail-qty').textContent;
-            const total = (p.price * qty).toLocaleString();
-            const text = `مرحباً، أريد طلب المنتج التالي من متجر أبابيل:\n📦 ${p.name}\n🔢 الكمية: ${qty}\n💰 السعر: ${total} جنيه سوداني\nشكراً!`;
-            window.open(`https://wa.me/971547140677?text=${encodeURIComponent(text)}`);
-        }
-
-        function sendCartWhatsApp() {
-            const items = cart.map(i => `▪️ ${i.name} × ${i.qty} = ${(i.price * i.qty).toLocaleString()} جنيه سوداني`).join('\n');
-            const total = cart.reduce((acc, i) => acc + (i.price * i.qty), 0).toLocaleString();
-            const text = `مرحباً، أريد تقديم الطلب التالي من متجر أبابيل:\n${items}\n💰 الإجمالي: ${total} جنيه سوداني\nشكراً!`;
-            window.open(`https://wa.me/971547140677?text=${encodeURIComponent(text)}`);
-        }
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') showScreen('products-screen');
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
+    });
+</script>
 
-        init();
-    </script>
 </body>
 </html>
